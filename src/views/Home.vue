@@ -24,42 +24,44 @@
           tag="div"
           group="meals"
           :animation="300"
-          style="min-height: 140px;"
+          style="min-height: 140px"
         >
           <template #item="{ element: meal, index }">
-            <div >
+            <div>
               <div class="icon-container">
-            <i class="fa fa-edit"></i>
-            <i class="fa fa-trash" @click="handleDelete(index)"></i>
-          </div>
-            <div class="drag-element flex item-center">
-            
-            <div v-if="meal.category === 'input'">
-                <div class="form-control">
-                  <p>{{ meal.label }}</p>
+                <i class="fa fa-edit"></i>
+                <i class="fa fa-trash" @click="handleDelete(index)"></i>
+              </div>
+              <div class="drag-element flex item-center">
+                <div v-if="meal.category === 'input'">
+                  <div class="form-control">
+                    <p>{{ meal.label }}</p>
 
-                  <input :type="text" />
+                    <input :type="text" />
+                  </div>
                 </div>
-            </div>
 
-            <div v-if="meal.category === 'text'">
-                <div>
-                  <h3>{{ meal.label }}</h3>
+                <div v-if="meal.category === 'text'">
+                  <div>
+                    <h3>{{ meal.label }}</h3>
+                  </div>
                 </div>
-            </div>
 
-            <div v-if="meal.category === 'button'">
-              <div class="form-control">
-            <button :type="meal.type">{{ meal.label }}</button>
-            </div>
-            </div>
-              <!-- {{ meal }} -->
-            </div>
+                <div v-if="meal.category === 'button'">
+                  <div class="form-control">
+                    <button :type="meal.type">{{ meal.label }}</button>
+                  </div>
+                </div>
+              </div>
             </div>
           </template>
         </draggable>
       </div>
-      <div class="card-container"></div>
+      <div class="card-container">
+        <div>
+            
+        </div>
+      </div>
     </div>
 
     <!-- <div class="element-grid">
@@ -79,8 +81,13 @@
 </template>
 
 <script setup>
-import {  ref } from "vue";
+import {  ref, watch } from "vue";
 import draggable from "vuedraggable";
+import {useStore} from "vuex";
+
+const store = useStore();
+
+
 const meals = ref([
   {
     name: "Input",
@@ -138,6 +145,28 @@ let yuckyMeals = ref([ ]);
 
 const handleDelete = (index) => {
  yuckyMeals.value.splice(index, 1)
+}
+
+watch(yuckyMeals, () => {
+  yuckyMeals.value.forEach((value) => {
+    console.log(value)
+    updatePopupPreview()
+  })
+})
+
+// const getFlows = computed(() => {
+//   // console.log(store.state.previewPopData)
+//   return store.state.previewPopData
+// })
+
+const updatePopupPreview = () => {
+  store.commit("SET_PREVIEW_POPUP_DATA", {
+    previewPopData: {
+      bgColor: "#8c3937",
+      color: "#ffffff",
+      popup_inputs: ['Spleet', 'Spleet', 'Spleet']
+    }
+  })
 }
 </script>
 
