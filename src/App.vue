@@ -84,6 +84,26 @@ export default {
 
 // utility classes
 
+.form-control {
+  p {
+    margin-bottom: 5px;
+    font-size: 14px;
+  }
+
+  input {
+    height: 40px;
+    width: 100%;
+    padding: 0 10px;
+    outline: none;
+  }
+
+  button {
+    height: 40px;
+    width: 100%;
+    padding: 0 20px;
+  }
+}
+
 .flex {
   display: flex;
 }
@@ -121,7 +141,7 @@ p {
   width: 100%;
   margin-bottom: 10px;
   min-height: 60px;
-  padding: 0 20px;
+  padding: 20px 20px;
   color: #595959;
   font-size: 14.5px;
   cursor: pointer;

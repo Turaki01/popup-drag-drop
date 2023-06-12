@@ -7,6 +7,63 @@
 
     <div class="element-grid">
       <div class="drag-drop-container">
+        <draggable
+          v-model="meals"
+          tag="div"
+          :animation="300"
+          :group="{ name: 'meals', pull: 'clone', put: false }"
+        >
+          <template #item="{ element: meal }">
+            <div class="drag-element flex item-center">{{ meal.name }}</div>
+          </template>
+        </draggable>
+      </div>
+      <div class="drag-drop-container">
+        <draggable
+          v-model="yuckyMeals"
+          tag="div"
+          group="meals"
+          :animation="300"
+          style="min-height: 140px;"
+        >
+          <template #item="{ element: meal, index }">
+            <div >
+              <div class="icon-container">
+            <i class="fa fa-edit"></i>
+            <i class="fa fa-trash" @click="handleDelete(index)"></i>
+          </div>
+            <div class="drag-element flex item-center">
+            
+            <div v-if="meal.category === 'input'">
+                <div class="form-control">
+                  <p>{{ meal.label }}</p>
+
+                  <input :type="text" />
+                </div>
+            </div>
+
+            <div v-if="meal.category === 'text'">
+                <div>
+                  <h3>{{ meal.label }}</h3>
+                </div>
+            </div>
+
+            <div v-if="meal.category === 'button'">
+              <div class="form-control">
+            <button :type="meal.type">{{ meal.label }}</button>
+            </div>
+            </div>
+              <!-- {{ meal }} -->
+            </div>
+            </div>
+          </template>
+        </draggable>
+      </div>
+      <div class="card-container"></div>
+    </div>
+
+    <!-- <div class="element-grid">
+      <div class="drag-drop-container">
         <div class="drag-element flex item-center">Text Field</div>
         <div class="drag-element flex item-center">Button</div>
         <div class="drag-element flex item-center">Star rating</div>
@@ -17,32 +74,100 @@
       </div>
       </div>
       <div class="card-container"></div>
-    </div>
+    </div> -->
   </div>
 </template>
 
-<script>
-export default {
-  name: "Home",
-  data() {
-    return {};
+<script setup>
+import {  ref } from "vue";
+import draggable from "vuedraggable";
+const meals = ref([
+  {
+    name: "Input",
+    label: "Default input field",
+    category: "input",
+    type: "text",
+    options: {
+      placeholder: "",
+      required: false,
+      value: "",
+    },
   },
-  components: {},
-  methods: {},
-  computed: {},
-};
+
+  {
+    name: "Text",
+    category: "text",
+    label: "Default Header",
+    type: "header",
+    options: {
+      headerClass: ""
+    },
+  },
+
+  {
+    name: "button",
+    category: "button",
+    type: "submit",
+    label: "Submit",
+    options: {
+      placeholder: "",
+      required: false,
+      value: "",
+    },
+  },
+
+  {
+    name: "star",
+    category: "star",
+    label: "",
+    options: {
+      placeholder: "",
+      required: false,
+      value: "",
+    },
+  },
+  // "Hamburger",
+  // "Pizza",
+  // "Spaghetti",
+  // "Tacos",
+  // "Teriyaki Chicken",
+]);
+
+let yuckyMeals = ref([ ]);
+
+
+const handleDelete = (index) => {
+ yuckyMeals.value.splice(index, 1)
+}
 </script>
 
 <style lang="scss" scoped>
 .home-container {
   padding: 20px 0;
 
+  .icon-container {
+    display: flex;
+    margin-bottom: 8px;
+    align-items: center;
+    justify-content: flex-end;
+
+    :first-child {
+      margin-right: 5px;
+      cursor: pointer;
+    }
+
+    :last-child {
+      color: red;
+      cursor: pointer;
+    }
+  }
+
   .header {
     margin-bottom: 30px;
   }
-   .element-grid {
+  .element-grid {
     display: grid;
-    grid-template-columns: 20% 40% auto;
+    grid-template-columns: 20% 30% auto;
     column-gap: 50px;
   }
 }
