@@ -16,6 +16,7 @@
 
 <script>
 import Navigation from "./components/Navigation.vue";
+
 export default {
   data() {
     return {
@@ -40,7 +41,6 @@ export default {
       this.mobile = false;
     },
   },
-  computed: {},
 };
 </script>
 
@@ -83,6 +83,24 @@ export default {
 }
 
 // utility classes
+
+.element-preview-container {
+  width: 550px;
+  height: 550px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+
+  .element-border {
+    width: 90%;
+    height: 90%;
+    border: 2px solid #fff;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-direction: column;
+  }
+}
 
 .form-control {
   p {
@@ -129,15 +147,60 @@ p {
   justify-content: center;
 }
 
+.justify-between {
+  justify-content: space-between;
+}
+
 .drag-drop-container {
-  border: 2px dashed #59bfba;
+  border: 2px dashed #000000;
   min-height: 100vh;
   width: 100%;
   padding: 20px;
 }
 
+.check-input-container {
+display: flex;
+margin-top: 10px;
+align-items: center;
+  p {
+    font-size: 14px;
+    margin-left: 10px;
+  }
+
+  .check-input {
+    width: 20px;
+    height: 20px;
+    border-radius: 5px;
+    border: 1px solid #ACACAC;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    cursor: pointer;
+
+    .inner-check {
+      background-color: #7661e0;
+      width: 13px;
+      height: 13px;
+      border-radius: 5px;
+    }
+  }
+}
+
+.color-picker {
+  margin-top: 14px;
+  p {
+    color: #4c4c4c;
+    font-size: 15px;
+    margin-bottom: 10px;
+  }
+
+  input {
+    width: 50px;
+    height: 50px;
+  }
+}
+
 .drag-element {
-  background-color: #fff;
   width: 100%;
   margin-bottom: 10px;
   min-height: 60px;
@@ -145,14 +208,12 @@ p {
   color: #595959;
   font-size: 14.5px;
   cursor: pointer;
-  -webkit-box-shadow: rgba(0, 0, 0, 0.09) 0px 3px 12px;
-  -moz-box-shadow: rgba(0, 0, 0, 0.09) 0px 3px 12px;
-  box-shadow: rgba(0, 0, 0, 0.09) 0px 3px 12px;
 }
 
 .card-container {
   background-color: #fff;
   min-height: 100vh;
+  padding: 30px;
   width: 100%;
   -webkit-box-shadow: rgba(0, 0, 0, 0.09) 0px 3px 12px;
   -moz-box-shadow: rgba(0, 0, 0, 0.09) 0px 3px 12px;
@@ -178,6 +239,28 @@ p {
   @media (min-width: 900px) {
     padding-top: 72px;
   }
+}
+
+
+button,
+.button {
+  cursor: pointer;
+  padding: 16px 24px;
+  border-radius: 30px;
+  border: none;
+  font-size: 12px;
+  color: #fff;
+}
+
+// animated invoice
+.toolkit-enter-active,
+.toolkit-leave-active {
+  transition: 0.8s ease all;
+}
+
+.toolkit-enter-from,
+.toolkit-leave-to {
+  transform: translateX(-700px);
 }
 
 // utility classes
