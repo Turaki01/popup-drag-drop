@@ -223,10 +223,22 @@ align-items: center;
   }
 }
 
+.star-container {
+    text-align: center;
+  }
+
 .drag-element-container-el {
   max-width: 380px;
   margin: 20px auto;
   cursor: pointer;
+
+  h3 {
+    text-align: center;
+  }
+
+  p {
+    text-align: center;
+  }
 }
 
 .drag-element {

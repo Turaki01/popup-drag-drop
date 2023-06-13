@@ -18,12 +18,13 @@
           <span>Add Fields</span>
         </div>
 
-        <router-link   v-if="listOfElements.length" class="preview-link" to="/preview">
+       
         <div
           class="button"
+          v-if="listOfElements.length"
+          @click="navigateToPreview"
         >Preview
         </div>
-      </router-link>
       </div>
     </div>
 
@@ -172,6 +173,7 @@
 import { mapMutations, mapState } from "vuex";
 import ElementToolKit from "@/components/ElementToolKit";
 import draggable from "vuedraggable";
+import { toolKitLocalStorageKey, previewPopUpLocalStorageKey } from  "@/utils/constants"
 
 export default {
   name: "Home",
@@ -199,13 +201,13 @@ export default {
     },
 
     navigateToPreview() {
-
+      localStorage.setItem(toolKitLocalStorageKey, JSON.stringify( this.toolKitElements))
+      localStorage.setItem(previewPopUpLocalStorageKey, JSON.stringify(this.previewPopData))
+      window.location.replace('/preview')
     },
 
     handleTextEdit(e, index) {
       const { innerText } = e.target;
-      console.log(innerText);
-      console.log(index);
       this.toolKitElements[index].label = innerText;
     },
   },
@@ -237,9 +239,7 @@ export default {
     cursor: pointer;
   }
 
-  .star-container {
-    text-align: center;
-  }
+  
 
   .header-button {
     display: flex;

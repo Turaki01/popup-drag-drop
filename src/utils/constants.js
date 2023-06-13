@@ -20,3 +20,7 @@ export const ListOfElements = [
     value: "button",
   },
 ];
+
+
+export const toolKitLocalStorageKey = "tlk-el-ky"
+export const previewPopUpLocalStorageKey = "prev-el-ky"
