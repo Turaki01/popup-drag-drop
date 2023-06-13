@@ -151,6 +151,18 @@ p {
   justify-content: space-between;
 }
 
+.button {
+    color: #fff;
+    background-color: #7661e0;
+    align-items: center;
+    justify-content: center;
+    width: fit-content;
+
+    img {
+      margin-right: 4px;
+    }
+  }
+  
 .drag-drop-container {
   border: 2px dashed #000000;
   min-height: 100vh;

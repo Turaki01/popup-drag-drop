@@ -2,7 +2,7 @@
   <div class="preview-container">
     <img src="@/assets/svg/celebration.svg" alt="" />
 
-    <h3>Yayy you did it party 🎉 Preview your popup</h3>
+    <p>Yayy you did it party 🎉 <br /> Preview your popup</p>
 
     <div class="button flex">
       <span>Preview Popup</span>
@@ -24,10 +24,13 @@ export default {
   flex-direction: column;
   align-items: center;
 
-  h3 {
+  p {
     max-width: 250px;
     margin-top: 20px;
     text-align: center;
+    margin-bottom: 30px;
+    line-height: 30px;
+    font-size: 16px;
   }
 
   img {

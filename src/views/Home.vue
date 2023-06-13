@@ -276,17 +276,6 @@ export default {
       max-width: 300px;
     }
   }
-  .button {
-    color: #fff;
-    background-color: #7661e0;
-    align-items: center;
-    justify-content: center;
-    width: fit-content;
-
-    img {
-      margin-right: 4px;
-    }
-  }
   .icon-container {
     display: flex;
     margin-bottom: 8px;
