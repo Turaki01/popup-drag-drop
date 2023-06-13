@@ -8,7 +8,8 @@ export default createStore({
       isRounded: true,
     },
     toolkitModal: null,
-    toolKitElements: []
+    toolKitElements: [],
+    modalActive: false,
   },
   mutations: {
     SET_PREVIEW_POPUP_DATA(state, payload) {
@@ -16,6 +17,9 @@ export default createStore({
     },
     TOGGLE_TOOLKIT_MODAL(state) {
       state.toolkitModal = !state.toolkitModal;
+    },
+    TOGGLE_MODAL(state) {
+      state.modalActive = !state.modalActive;
     },
     SET_TOOLKIT_ELEMENT_DATA(state, payload) {
       state.toolKitElements.push(payload)

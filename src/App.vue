@@ -1,16 +1,12 @@
 <template>
   <div>
-    <div v-if="!mobile" class="app">
+    <div  class="app">
       <Navigation />
       <div class="app-content">
         <router-view />
       </div>
     </div>
 
-    <div v-else class="mobile-message flex flex-column">
-      <h2>Sorry, this app is not supported on Mobile Devices</h2>
-      <p>To use this app, please use a computer or Tablet</p>
-    </div>
   </div>
 </template>
 
@@ -90,6 +86,14 @@ export default {
   display: flex;
   justify-content: center;
   align-items: center;
+
+  @media  only screen and (min-width: 300px) and (max-width: 900px){
+    width: 380px;
+  height: 380px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
 
   .element-border {
     width: 90%;
@@ -223,10 +227,23 @@ align-items: center;
   }
 }
 
+.star-container {
+    text-align: center;
+  }
+
 .drag-element-container-el {
-  max-width: 380px;
+  max-width: 360px;
   margin: 20px auto;
   cursor: pointer;
+
+  h3 {
+    text-align: center;
+    overflow-wrap: break-word;
+  }
+
+  p {
+    text-align: center;
+  }
 }
 
 .drag-element {
