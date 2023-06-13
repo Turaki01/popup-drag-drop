@@ -39,6 +39,19 @@ export const ElementToJSON = (el) => {
           },
         };
 
+        case "header":
+          return {
+            name: "header",
+            type: "text",
+            category: "header",
+            label: "Header Element",
+            property: {
+              placeholder: "",
+              required: "",
+              value: "",
+            },
+          };
+
     default:
       return {
         name: "text",

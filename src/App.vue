@@ -151,11 +151,34 @@ p {
   justify-content: space-between;
 }
 
+.button {
+    color: #fff;
+    background-color: #7661e0;
+    align-items: center;
+    justify-content: center;
+    width: fit-content;
+
+    img {
+      margin-right: 4px;
+    }
+  }
+  
 .drag-drop-container {
   border: 2px dashed #000000;
   min-height: 100vh;
   width: 100%;
   padding: 20px;
+}
+
+.element-button {
+  height: 50px !important;
+  background-color: #1a1a1a;
+  font-weight: 600;
+  font-size: 17px;
+}
+
+.full-width {
+  width: 100%;
 }
 
 .check-input-container {
@@ -200,14 +223,29 @@ align-items: center;
   }
 }
 
+.drag-element-container-el {
+  max-width: 380px;
+  margin: 20px auto;
+  cursor: pointer;
+}
+
 .drag-element {
   width: 100%;
   margin-bottom: 10px;
+  -webkit-box-shadow: rgba(0, 0, 0, 0.09) 0px 3px 12px;
+  -moz-box-shadow: rgba(0, 0, 0, 0.09) 0px 3px 12px;
+  box-shadow: rgba(0, 0, 0, 0.09) 0px 3px 12px;
   min-height: 60px;
   padding: 20px 20px;
   color: #595959;
   font-size: 14.5px;
   cursor: pointer;
+  position: relative;
+}
+
+.fa-star {
+  font-size: 22px;
+  color: #cb3735;
 }
 
 .card-container {
