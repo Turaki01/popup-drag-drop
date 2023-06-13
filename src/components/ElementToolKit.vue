@@ -26,7 +26,12 @@
 
         <div class="color-picker">
           <p>Select a text color</p>
-          <input type="color" :value="previewPopData.color" id="textColor" @change="handleColorSelection($event)"/>
+          <input
+            type="color"
+            :value="previewPopData.color"
+            id="textColor"
+            @change="handleColorSelection($event)"
+          />
         </div>
       </div>
 
@@ -59,7 +64,7 @@ export default {
     };
   },
   computed: {
-    ...mapState(["toolkitModal", "previewPopData"]),
+    ...mapState(["toolkitModal", "previewPopData", "toolKitElements"]),
   },
   methods: {
     ...mapMutations([
@@ -76,7 +81,10 @@ export default {
 
     handlePopupShape() {
       const payload = this.previewPopData;
-      this.SET_PREVIEW_POPUP_DATA({ ...payload, isRounded: !payload.isRounded });
+      this.SET_PREVIEW_POPUP_DATA({
+        ...payload,
+        isRounded: !payload.isRounded,
+      });
     },
 
     handleColorSelection(e) {
@@ -94,6 +102,10 @@ export default {
     },
 
     handleElementSelection(el) {
+      if (this.toolKitElements.length == 5) {
+        alert("You have reached the maximum number of elements");
+        return;
+      }
       this.SET_TOOLKIT_ELEMENT_DATA(ElementToJSON(el));
     },
   },

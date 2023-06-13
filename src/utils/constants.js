@@ -1,6 +1,10 @@
 export const ListOfElements = [
   {
-    name: "Text Field",
+    name: "Header",
+    value: "header",
+  },
+  {
+    name: "Text",
     value: "text",
   },
   {

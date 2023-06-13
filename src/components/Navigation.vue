@@ -1,6 +1,8 @@
 <template>
   <div class="navigation flex flex-column justify-center">
+    <router-link  to="/">
     <img src="../assets/png/logo.png" alt="" />
+  </router-link>
   </div>
 </template>
 <script>

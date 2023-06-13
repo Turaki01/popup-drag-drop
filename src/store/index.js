@@ -4,7 +4,7 @@ export default createStore({
   state: {
     previewPopData: {
       bgColor: "#8c3937",
-      color: "#000000",
+      color: "#ffffff",
       isRounded: true,
     },
     toolkitModal: null,
@@ -18,7 +18,7 @@ export default createStore({
       state.toolkitModal = !state.toolkitModal;
     },
     SET_TOOLKIT_ELEMENT_DATA(state, payload) {
-      state.toolKitElements.push(payload);
+      state.toolKitElements.push(payload)
     },
   },
   actions: {

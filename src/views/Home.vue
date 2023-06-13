@@ -6,11 +6,24 @@
         <p>why don&#39;t we build your popup together</p>
       </div>
 
-      <div v-if="listOfElements.length" @click="addNewFields" class="button flex">
-        <div class="inner-button flex">
-          <img src="@/assets/svg/icon-plus.svg" alt="" />
+      <div class="header-button">
+        <div
+          v-if="listOfElements.length"
+          @click="addNewFields"
+          class="button flex"
+        >
+          <div class="inner-button flex">
+            <img src="@/assets/svg/icon-plus.svg" alt="" />
+          </div>
+          <span>Add Fields</span>
         </div>
-        <span>Add Fields</span>
+
+        <router-link   v-if="listOfElements.length" class="preview-link" to="/preview">
+        <div
+          class="button"
+        >Preview
+        </div>
+      </router-link>
       </div>
     </div>
 
@@ -21,14 +34,21 @@
         <div class="empty-state" v-if="!listOfElements.length">
           <img src="@/assets/svg/empty-state.svg" alt="" />
 
-          <p>Ops seems you have no fields ! Click on add fields button and start your journey</p>
+          <p>
+            Ops seems you have no fields ! Click on add field button and start
+            your journey
+          </p>
 
-          <div v-if="!listOfElements.length" @click="addNewFields" class="button flex">
-        <div class="inner-button flex">
-          <img src="@/assets/svg/icon-plus.svg" alt="" />
-        </div>
-        <span>Add Fields</span>
-      </div>
+          <div
+            v-if="!listOfElements.length"
+            @click="addNewFields"
+            class="button flex"
+          >
+            <div class="inner-button flex">
+              <img src="@/assets/svg/icon-plus.svg" alt="" />
+            </div>
+            <span>Add Field</span>
+          </div>
         </div>
         <!-- empty state -->
 
@@ -50,22 +70,41 @@
             <draggable
               v-model="listOfElements"
               tag="div"
+              class="full-width"
               :animation="300"
               :group="{ name: 'listOfElements' }"
             >
               <template #item="{ element: listOfElements }">
-                <div class="drag-element flex item-center">
+                <div class="drag-element-container-el">
+                  <div
+                    class="star-container"
+                    v-if="listOfElements.category === 'star'"
+                  >
+                    <span class="fa fa-star checked"></span>
+                    <span class="fa fa-star"></span>
+                    <span class="fa fa-star"></span>
+                    <span class="fa fa-star"></span>
+                    <span class="fa fa-star"></span>
+                  </div>
+
                   <div v-if="listOfElements.category === 'input'">
                     <div class="form-control">
-                      <p :style="{ color: this.previewPopData.color }">
-                        {{ listOfElements?.label }}
-                      </p>
-
-                      <input :type="text" />
+                      <input
+                        :type="text"
+                        :placeholder="listOfElements?.label"
+                      />
                     </div>
                   </div>
 
                   <div v-if="listOfElements.category === 'text'">
+                    <div>
+                      <p :style="{ color: this.previewPopData.color }">
+                        {{ listOfElements.label }}
+                      </p>
+                    </div>
+                  </div>
+
+                  <div v-if="listOfElements.category === 'header'">
                     <div>
                       <h3 :style="{ color: this.previewPopData.color }">
                         {{ listOfElements.label }}
@@ -75,7 +114,10 @@
 
                   <div v-if="listOfElements.category === 'button'">
                     <div class="form-control">
-                      <button :type="listOfElements.type">
+                      <button
+                        class="element-button"
+                        :type="listOfElements.type"
+                      >
                         {{ listOfElements.label }}
                       </button>
                     </div>
@@ -88,7 +130,7 @@
         </div>
       </div>
       <div class="card-container">
-        <h4>Element preview</h4>
+        <h4 style="margin-bottom: 20px">Element preview</h4>
 
         <draggable
           v-model="listOfElements"
@@ -96,28 +138,23 @@
           :animation="300"
           :group="{ name: 'listOfElements', pull: 'clone', put: false }"
         >
-          <template #item="{ element: listOfElements }">
+          <template #item="{ element: listOfElements, index }">
             <div class="drag-element flex item-center">
-              <div v-if="listOfElements.category === 'input'">
-                <div class="form-control">
-                  <p>{{ listOfElements?.label }}</p>
-
-                  <input :type="text" />
-                </div>
+              <div class="icon-container">
+                <i class="fa fa-trash" @click="handleDelete(index)"></i>
               </div>
-
-              <div v-if="listOfElements.category === 'text'">
-                <div>
-                  <h3>{{ listOfElements.label }}</h3>
-                </div>
-              </div>
-
-              <div v-if="listOfElements.category === 'button'">
-                <div class="form-control">
-                  <button :type="listOfElements.type">
-                    {{ listOfElements.label }}
-                  </button>
-                </div>
+              <div class="form-control">
+                <h4 class="element-preview-type">
+                  Type : {{ listOfElements?.category }}
+                </h4>
+                <p
+                  v-if="listOfElements?.type !== 'star'"
+                  class="editable-content"
+                  contenteditable="true"
+                  @input="handleTextEdit($event, index)"
+                >
+                  {{ listOfElements?.label }}
+                </p>
               </div>
             </div>
           </template>
@@ -151,17 +188,31 @@ export default {
     ...mapState(["toolkitModal", "toolKitElements", "previewPopData"]),
   },
   methods: {
-    ...mapMutations(["TOGGLE_TOOLKIT_MODAL"]),
+    ...mapMutations(["TOGGLE_TOOLKIT_MODAL", "SET_TOOLKIT_ELEMENT_DATA"]),
 
     addNewFields() {
       this.TOGGLE_TOOLKIT_MODAL();
+    },
+
+    handleDelete(index) {
+      this.toolKitElements.splice(index, 1);
+    },
+
+    navigateToPreview() {
+
+    },
+
+    handleTextEdit(e, index) {
+      const { innerText } = e.target;
+      console.log(innerText);
+      console.log(index);
+      this.toolKitElements[index].label = innerText;
     },
   },
   watch: {
     toolKitElements: {
       handler() {
-        console.log(this.toolKitElements);
-        this.listOfElements = [...this.listOfElements, ...this.toolKitElements];
+        this.listOfElements = [...this.toolKitElements];
       },
       deep: true,
     },
@@ -169,10 +220,44 @@ export default {
 };
 </script>
 
-
 <style lang="scss" scoped>
 .home-container {
   padding: 20px 0;
+
+  .element-preview-type {
+    margin-bottom: 10px;
+    text-transform: capitalize;
+  }
+
+  .icon-container {
+    position: absolute;
+    color: red;
+    right: 10px;
+    top: 10px;
+    cursor: pointer;
+  }
+
+  .star-container {
+    text-align: center;
+  }
+
+  .header-button {
+    display: flex;
+
+    :first-child {
+      margin-right: 10px;
+    }
+  }
+
+  .editable-content {
+    border: 1px solid #d7d7d7;
+    border-radius: 5px;
+    word-wrap: break-word;
+    width: 100%;
+    max-width: 240px;
+    outline: none;
+    padding: 10px;
+  }
 
   .empty-state {
     display: flex;
@@ -226,6 +311,10 @@ export default {
     display: grid;
     grid-template-columns: 25% auto 25%;
     column-gap: 50px;
+  }
+
+  .preview-link {
+    text-decoration: none;
   }
 }
 </style>
