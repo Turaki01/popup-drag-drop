@@ -121,6 +121,14 @@ export default {
     margin: 10px 0 !important;
   }
 
+  .form-control {
+    margin: 20px 0;
+  }
+
+  .element-button {
+    margin: 20px 0 !important;
+  } 
+
   p {
     max-width: 250px;
     margin-top: 20px;

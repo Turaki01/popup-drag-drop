@@ -18,12 +18,12 @@
           <span>Add Fields</span>
         </div>
 
-       
         <div
           class="button"
           v-if="listOfElements.length"
           @click="navigateToPreview"
-        >Preview
+        >
+          Preview
         </div>
       </div>
     </div>
@@ -173,7 +173,10 @@
 import { mapMutations, mapState } from "vuex";
 import ElementToolKit from "@/components/ElementToolKit";
 import draggable from "vuedraggable";
-import { toolKitLocalStorageKey, previewPopUpLocalStorageKey } from  "@/utils/constants"
+import {
+  toolKitLocalStorageKey,
+  previewPopUpLocalStorageKey,
+} from "@/utils/constants";
 
 export default {
   name: "Home",
@@ -201,9 +204,15 @@ export default {
     },
 
     navigateToPreview() {
-      localStorage.setItem(toolKitLocalStorageKey, JSON.stringify( this.toolKitElements))
-      localStorage.setItem(previewPopUpLocalStorageKey, JSON.stringify(this.previewPopData))
-      window.location.replace('/preview')
+      localStorage.setItem(
+        toolKitLocalStorageKey,
+        JSON.stringify(this.toolKitElements)
+      );
+      localStorage.setItem(
+        previewPopUpLocalStorageKey,
+        JSON.stringify(this.previewPopData)
+      );
+      window.location.replace("/preview");
     },
 
     handleTextEdit(e, index) {
@@ -238,8 +247,6 @@ export default {
     top: 10px;
     cursor: pointer;
   }
-
-  
 
   .header-button {
     display: flex;
@@ -297,9 +304,15 @@ export default {
     margin-bottom: 30px;
   }
   .element-grid {
-    display: grid;
-    grid-template-columns: 25% auto 25%;
-    column-gap: 50px;
+
+      display: grid;
+      grid-template-columns: 25% auto 25%;
+      column-gap: 50px;
+
+      @media only screen and (min-width: 300px) and (max-width: 900px) {
+display: block;
+}
+    
   }
 
   .preview-link {
